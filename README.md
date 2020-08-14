@@ -1,107 +1,80 @@
-## Spacer Walking and PAM Analysis - Overview
+# Spacer Walking and PAM Analysis - Overview
 
 The perl program (spacerWalkingAndPamAnalysis.pl) captures and counts the adaptor ligated sequences at every protospacer position (Spacer Walking) and also the PAM regions between the 5'flank and 3'flank (PAM Analysis)
 
-1. SYSTEM REQUIREMENTS
+## 1. SYSTEM REQUIREMENTS
 
 You will just need a bash and a perl environment (version 5 or higher) to run the program. No other dependencies involved. 
 
-2. Execution Instructions
+## 2. Execution Instructions
 
-sh masterAnalysis.sh config.txt
+	sh masterAnalysis.sh config.txt
 
 The config.txt file contains all the information needed to run the analysis script. The masterAnalysis.sh script serves as a wrapper which parses the information from the config.txt file and calls the spacerWalkingAndPamAnalysis.pl perl program.
 
-## Config.txt file - contents
+### Config.txt file - contents
 
 The config.txt file contains the below fields:
 
-INPUT_FILE=input.txt ## Your input file containing the sample information, barcodes and flanks
-PROJECT_NAME=Cas9-Run2 ## Your project name
-EXPT_FASTQ=AK101.fastq ## Your fastq file that contains all your barcoded sample data
-RESULTS_DIR=/path/to/my/SpacerAndPamAnalysis ## Directory where you want to write the results to
-BARCODE_LEN=6 ## Barcode length in your barcoded fastq file
-EXPECTED_PAM_LEN=7 ## Expected pam length between the flanks
+	INPUT_FILE =input.txt // Your input file containing the sample information, barcodes and flanks 
+	PROJECT_NAME=Cas9-Run2 // Your project name 
+	EXPT_FASTQ=AK101.fastq // Your fastq file that contains all your barcoded sample data
+	RESULTS_DIR=/path/to/my/SpacerAndPamAnalysis // Directory where you want to write the results to
+	BARCODE_LEN=6 // Barcode length in your barcoded fastq file
+	EXPECTED_PAM_LEN=7 // Expected pam length between the flanks
 
-## input.txt file - contents
+### Input.txt file - contents
 
-input.txt is a tab delimited file conatining the sample name, position to analyze, barcode of the sample and the flanks at that position. Each position you wish to analyze get its own row with its associated flanks
+The input.txt is a tab delimited file conatining the sample name, position to analyze, barcode of the sample and the flanks at that position. Each position you wish to analyze get its own row with its associated flanks.
 
-Sample	Position	Barcode	5_Flank	3_Flank
-Sample1	1	ACGAAG	CGGCATTCCTGCTGAACCGCTCTTCCGATCTA	AGTTGACCCA
-Sample1	2	ACGAAG	CGGCATTCCTGCTGAACCGCTCTTCCGATCTCA	AGTTGACCCA
-Sample1	3	ACGAAG	CGGCATTCCTGCTGAACCGCTCTTCCGATCTACA	AGTTGACCCA
-Sample1	4	ACGAAG	CGGCATTCCTGCTGAACCGCTCTTCCGATCTGACA	AGTTGACCCA
-Sample1	5	ACGAAG	CGGCATTCCTGCTGAACCGCTCTTCCGATCTGGACA	AGTTGACCCA
-Sample1	6	ACGAAG	GGCATTCCTGCTGAACCGCTCTTCCGATCTAGGACA	AGTTGACCCA
-Sample1	7	ACGAAG	GCATTCCTGCTGAACCGCTCTTCCGATCTGAGGACA	AGTTGACCCA
-Sample1	8	ACGAAG	CATTCCTGCTGAACCGCTCTTCCGATCTAGAGGACA	AGTTGACCCA
-Sample1	9	ACGAAG	ATTCCTGCTGAACCGCTCTTCCGATCTAAGAGGACA	AGTTGACCCA
-Sample1	10	ACGAAG	TTCCTGCTGAACCGCTCTTCCGATCTGAAGAGGACA	AGTTGACCCA
-Sample1	11	ACGAAG	TCCTGCTGAACCGCTCTTCCGATCTGGAAGAGGACA	AGTTGACCCA
-Sample2	1	TGCTTC	CGGCATTCCTGCTGAACCGCTCTTCCGATCTA	AGTTGACCCA
-Sample2	2	TGCTTC	CGGCATTCCTGCTGAACCGCTCTTCCGATCTCA	AGTTGACCCA
-Sample2	3	TGCTTC	CGGCATTCCTGCTGAACCGCTCTTCCGATCTACA	AGTTGACCCA
-Sample2	4	TGCTTC	CGGCATTCCTGCTGAACCGCTCTTCCGATCTGACA	AGTTGACCCA
-Sample2	5	TGCTTC	CGGCATTCCTGCTGAACCGCTCTTCCGATCTGGACA	AGTTGACCCA
-Sample2	6	TGCTTC	GGCATTCCTGCTGAACCGCTCTTCCGATCTAGGACA	AGTTGACCCA
-Sample2	7	TGCTTC	GCATTCCTGCTGAACCGCTCTTCCGATCTGAGGACA	AGTTGACCCA
-Sample2	8	TGCTTC	CATTCCTGCTGAACCGCTCTTCCGATCTAGAGGACA	AGTTGACCCA
-Sample2	9	TGCTTC	ATTCCTGCTGAACCGCTCTTCCGATCTAAGAGGACA	AGTTGACCCA
-Sample2	10	TGCTTC	TTCCTGCTGAACCGCTCTTCCGATCTGAAGAGGACA	AGTTGACCCA
-Sample2	11	TGCTTC	TCCTGCTGAACCGCTCTTCCGATCTGGAAGAGGACA	AGTTGACCCA
-Sample3	1	GTACCA	CGGCATTCCTGCTGAACCGCTCTTCCGATCTA	AGTTGACCCA
-Sample3	2	GTACCA	CGGCATTCCTGCTGAACCGCTCTTCCGATCTCA	AGTTGACCCA
-Sample3	3	GTACCA	CGGCATTCCTGCTGAACCGCTCTTCCGATCTACA	AGTTGACCCA
-Sample3	4	GTACCA	CGGCATTCCTGCTGAACCGCTCTTCCGATCTGACA	AGTTGACCCA
-Sample3	5	GTACCA	CGGCATTCCTGCTGAACCGCTCTTCCGATCTGGACA	AGTTGACCCA
-Sample3	6	GTACCA	GGCATTCCTGCTGAACCGCTCTTCCGATCTAGGACA	AGTTGACCCA
-Sample3	7	GTACCA	GCATTCCTGCTGAACCGCTCTTCCGATCTGAGGACA	AGTTGACCCA
-Sample3	8	GTACCA	CATTCCTGCTGAACCGCTCTTCCGATCTAGAGGACA	AGTTGACCCA
-Sample3	9	GTACCA	ATTCCTGCTGAACCGCTCTTCCGATCTAAGAGGACA	AGTTGACCCA
-Sample3	10	GTACCA	TTCCTGCTGAACCGCTCTTCCGATCTGAAGAGGACA	AGTTGACCCA
-Sample3	11	GTACCA	TCCTGCTGAACCGCTCTTCCGATCTGGAAGAGGACA	AGTTGACCCA
+|Sample|Position|Barcode|   5_Flank	|3_Flank|
+|:----:|:------:|:--------:|:------:|:-----:|
+|Sample1 |	1 |	ACGAAG |	CGGCATTCCTGCTGAACCGCTCTTCCGATCTA |	AGTTGACCCA |
+|Sample1 |	2 |	ACGAAG |	CGGCATTCCTGCTGAACCGCTCTTCCGATCTCA |	AGTTGACCCA |
+|Sample1 |	3 |	ACGAAG |	CGGCATTCCTGCTGAACCGCTCTTCCGATCTACA |	AGTTGACCCA |
+|Sample2 |	1 |	TGCTTC |	CGGCATTCCTGCTGAACCGCTCTTCCGATCTA |	AGTTGACCCA |
+|Sample2 |	2 |	TGCTTC |	CGGCATTCCTGCTGAACCGCTCTTCCGATCTCA |	AGTTGACCCA |
+|Sample2 |	3 |	TGCTTC |	CGGCATTCCTGCTGAACCGCTCTTCCGATCTACA |	AGTTGACCCA |
+|Sample3 |	1 |	GTACCA |	CGGCATTCCTGCTGAACCGCTCTTCCGATCTA |	AGTTGACCCA |
+|Sample3 |	2 |	GTACCA |	CGGCATTCCTGCTGAACCGCTCTTCCGATCTCA |	AGTTGACCCA |
+|Sample3 |	3 |	GTACCA |	CGGCATTCCTGCTGAACCGCTCTTCCGATCTACA |	AGTTGACCCA |
 
-
-## Analysis Results  
+### Analysis Results  
 
 The spacer walking and pam data are written to the folder PAM_Data under your results directory location. For every position of interest, a summary file and a tsv (tab seperated values) file is generated. 
 
-	*The summary file - contains the numbers on the total number of reads analyzed, barcode matched and PAM detected.
-	*The .tsv file - each position analyzed gets it own .tsv file with the data on the PAM sequence and its count for every sample. 
+	The summary file - contains the numbers on the total number of reads analyzed, barcode matched and PAM detected.
+   	The .tsv file - each position analyzed gets it own .tsv file with the data on the PAM sequence and its count for every sample. 
 
 Example summary file:
 
-# Sample1
-# Total Reads:		100000
-# Barcode Matched:	22626
-# PAM Counted:		79
+|Sample1 | Count |
+|:------:|:----:|
+| Total Reads:|		100000 |
+|Barcode Matched:|	22626 |
+| PAM Counted:	|	79 |
 
 Example .tsv file:
 
-#Sample	PAM	Count
-Sample1	Total	79
-Sample1	GGGACCA	1
-Sample1	GGGAAAG	1
-Sample1	GGGTAAA	1
-Sample1	TATGGAT	1
-Sample1	GGGTGAG	1
-Sample1	CAAGGGG	1
-Sample1	CAAGGTT	1
-Sample1	TACGGTC	1
+|Sample	|PAM |	Count |
+|:------:|:---:|:------:|
+|Sample1|	Total |79 |
+|Sample1|	GGGACCA |	1 |
+|Sample1|	GGGAAAG |	1 |
+|Sample1|	GGGTAAA |	1 |
+|Sample1|	TATGGAT |	1 |
 		
-#Sample	PAM	Count
-Sample2	Total	6473
-Sample2	TCTTGTC	1
-Sample2	TCCCTGT	1
-Sample2	CAGTCGC	1
-Sample2	TACTTGT	1
-Sample2	TAGGAAT	1
+|Sample	|PAM |	Count |
+|:------:|:---:|:------:|
+|Sample2|	Total |376 |
+|Sample2|	TCTTGTC |	1 |
+|Sample2|	GGGAAAG |	1 |
+|Sample2|	TCTTGAA |	1 |
+|Sample2|	TATGGAT |	1 |
 
-3. DEMO
+## 3. DEMO
 
 The demo data is present under the folder DEMO. It should take less than a minute to run the script. Only 2 positions are analyzed for 3 samples using a subset of the actual fastq file. The data was generated by running the following command.
 
 sh masterAnalysis.sh config.txt
-
 
