@@ -1,0 +1,52 @@
+#Sample	PAM	Count
+Sample1	Total	7475
+Sample1	AAGGATC	2
+Sample1	AAGGAAG	2
+Sample1	TAGTACG	1
+Sample1	AAGGCTC	1
+Sample1	CGGCGAT	1
+Sample1	CAGACTT	1
+Sample1	CTGGTAT	1
+Sample1	AAGAGAG	1
+Sample1	GGGGCAT	1
+Sample1	TGGAGGT	1
+Sample1	CGGAAAT	1
+Sample1	GCGGTCG	1
+Sample1	GTGGGGG	1
+Sample1	CAGTATC	1
+Sample1	ACGGACT	1
+Sample1	AAGGTTT	1
+Sample1	TGGATGT	1
+Sample1	AAGGTCT	1
+
+
+#Sample	PAM	Count
+Sample4	Total	6473
+Sample4	GCTACCG	1
+Sample4	TATAAAG	1
+Sample4	CCATGCC	1
+Sample4	TATCAGA	1
+Sample4	TCACGTC	1
+Sample4	TTTTCCC	1
+Sample4	GATCCAC	1
+Sample4	CCACCCT	1
+Sample4	GTCTGAA	1
+Sample4	GAATACT	1
+
+
+#Sample	PAM	Count
+Sample23	Total	8678
+Sample23	GGGAATC	1
+Sample23	CTGGTCC	1
+Sample23	TCGGTAG	1
+Sample23	CGGAGGT	1
+Sample23	AGGGCTT	1
+Sample23	ACGGTAC	1
+Sample23	AAGGAAG	1
+Sample23	GCGGTAA	1
+Sample23	CTATTAG	1
+Sample23	TGGAATG	1
+Sample23	ATGGTAG	1
+Sample23	CAGATCA	1
+
+

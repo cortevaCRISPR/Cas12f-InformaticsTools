@@ -1,0 +1,4 @@
+# AK101-1
+# Total Reads:		100000
+# Barcode Matched:	22626
+# PAM Counted:		79
