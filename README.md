@@ -2,7 +2,7 @@
 
 The perl program (spacerWalkingAndPamAnalysis.pl) captures and counts the adaptor ligated sequences at every protospacer position (Spacer Walking) and also the PAM regions between the 5'flank and 3'flank (PAM Analysis)
 
-## 1. SYSTEM REQUIREMENTS
+## 1. System Requirements
 
 You will just need a bash and a perl environment (version 5 or higher) to run the program. No other dependencies involved. 
 
@@ -63,9 +63,6 @@ Example .tsv file:
 |Sample1|	GGGAAAG |	1 |
 |Sample1|	GGGTAAA |	1 |
 |Sample1|	TATGGAT |	1 |
-		
-|Sample	|PAM |	Count |
-|:------:|:---:|:------:|
 |Sample2|	Total |376 |
 |Sample2|	TCTTGTC |	1 |
 |Sample2|	GGGAAAG |	1 |
